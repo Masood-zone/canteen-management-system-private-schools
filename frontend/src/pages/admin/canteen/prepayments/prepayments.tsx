@@ -17,7 +17,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Calendar, DollarSign, Users, Clock } from "lucide-react";
+import { Plus, Calendar, BadgeCent, Users, Clock } from "lucide-react";
 import { format } from "date-fns";
 import { useFetchClasses } from "@/services/api/classes/classes.queries";
 import { useFetchStudentsInClass } from "@/services/api/students/students.queries";
@@ -144,7 +144,7 @@ export default function Prepayments() {
                 <CardTitle className="text-sm font-medium">
                   Total Amount
                 </CardTitle>
-                <DollarSign className="h-4 w-4 text-muted-foreground" />
+                <BadgeCent className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">GHC {totalAmount}</div>
