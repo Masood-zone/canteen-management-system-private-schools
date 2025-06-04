@@ -5,6 +5,7 @@ import { useFetchRecordsAmount } from "@/services/api/settings/settings.queries"
 
 import { useAuthStore } from "@/store/authStore";
 import { CurrencyIcon, UserCheck, Users, UserX } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function TeacherHome() {
   const { user, assigned_class } = useAuthStore();
@@ -14,7 +15,7 @@ export default function TeacherHome() {
     isLoading,
     error,
   } = useTeacherAnalytics(assigned_class?.id ?? 0);
-
+  const navigate = useNavigate();
   return (
     <>
       {/* Welcome message */}
@@ -57,13 +58,19 @@ export default function TeacherHome() {
               notice="Total expected amount from all students"
               variant="blue"
             />
-            <ProfessionalAnalyticsCard
-              title="Total Students"
-              value={analytics?.totalStudents || 0}
-              icon={Users}
-              notice="Total number of students in the class"
-              variant="purple"
-            />
+            <div
+              onClick={() => navigate("/teacher/students")}
+              className="cursor-pointer"
+            >
+              <ProfessionalAnalyticsCard
+                title="Total Students"
+                value={analytics?.totalStudents || 0}
+                icon={Users}
+                notice="Total number of students in the class"
+                variant="purple"
+              />
+            </div>
+
             <ProfessionalAnalyticsCard
               title="Paid Students"
               value={analytics?.paidStudents?.count || 0}
