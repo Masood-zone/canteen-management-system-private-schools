@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.setupRoutes = void 0;
 const auth_routes_1 = require("./auth-routes");
 const user_routes_1 = require("./user-routes");
+const admin_routes_1 = require("./admin-routes");
 const class_routes_1 = require("./class-routes");
 const student_routes_1 = require("./student-routes");
 const record_routes_1 = require("./record-routes");
@@ -11,8 +12,10 @@ const teacher_routes_1 = require("./teacher-routes");
 const expense_routes_1 = require("./expense-routes");
 const reference_routes_1 = require("./reference-routes");
 const analytics_routes_1 = require("./analytics-routes");
+const prepayment_routes_1 = require("./prepayment-routes");
 const setupRoutes = (app) => {
     app.use("/auth", auth_routes_1.authRoutes);
+    app.use("/admins", admin_routes_1.adminRoutes);
     app.use("/users", user_routes_1.userRoutes);
     app.use("/classes", class_routes_1.classRoutes);
     app.use("/students", student_routes_1.studentRoutes);
@@ -22,6 +25,7 @@ const setupRoutes = (app) => {
     app.use("/expenses", expense_routes_1.expenseRoutes);
     app.use("/references", reference_routes_1.referenceRoutes);
     app.use("/analytics", analytics_routes_1.analyticsRoutes);
+    app.use("/prepayments", prepayment_routes_1.prepaymentRoutes);
 };
 exports.setupRoutes = setupRoutes;
 //# sourceMappingURL=index.js.map

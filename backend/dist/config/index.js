@@ -11,7 +11,7 @@ exports.config = {
         port: process.env.PORT || 3400,
     },
     cors: {
-        origin: process.env.CORS_ORIGIN || "https://can.rasking.top",
+        origin: process.env.CORS_ORIGIN,
         optionsSuccessStatus: 200,
     },
     jwt: {
