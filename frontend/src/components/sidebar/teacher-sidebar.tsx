@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 import { ChevronsUpDown } from "lucide-react";
 import {
   DropdownMenu,
@@ -33,27 +33,31 @@ export function TeacherSidebar({
 
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader className="w-full border-b">
+      <SidebarHeader className="w-full border-b p-2">
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton
                   size="lg"
-                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground w-full"
                 >
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground">
-                    <img src={Logo} alt="Logo" className="w-6 h-6" />
+                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                    <img
+                      src={Logo || "/placeholder.svg"}
+                      alt="Logo"
+                      className="w-6 h-6"
+                    />
                   </div>
-                  {state === "expanded" && (
+                  {(state === "expanded" || isMobile) && (
                     <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-semibold">
+                      <span className="truncate font-semibold text-xs sm:text-sm">
                         Canteen Management System
                       </span>
                     </div>
                   )}
-                  {state === "expanded" && (
-                    <ChevronsUpDown className="ml-auto" />
+                  {(state === "expanded" || isMobile) && (
+                    <ChevronsUpDown className="ml-auto size-4" />
                   )}
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
@@ -68,9 +72,13 @@ export function TeacherSidebar({
                 </DropdownMenuLabel>
                 <DropdownMenuItem className="gap-2 p-2">
                   <div className="flex size-6 items-center justify-center rounded-sm border">
-                    <img src={Logo} alt="Logo" className="w-4 h-4" />
+                    <img
+                      src={Logo || "/placeholder.svg"}
+                      alt="Logo"
+                      className="w-4 h-4"
+                    />
                   </div>
-                  Canteen Management System
+                  <span className="text-sm">Canteen Management System</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -80,7 +88,7 @@ export function TeacherSidebar({
       <SidebarContent>
         <NavMain items={teacher_nav.navMain} />
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="p-2">
         {mainUser && (
           <NavUser user={{ ...mainUser, token: user.token, user: user.user }} />
         )}
