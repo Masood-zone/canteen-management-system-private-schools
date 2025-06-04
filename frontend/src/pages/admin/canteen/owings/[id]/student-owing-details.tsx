@@ -59,31 +59,37 @@ export default function StudentOwingDetails() {
   const owingHistory = owingDetails?.owingHistory || [];
 
   return (
-    <div className="container mx-auto py-10 px-5">
-      <div className="flex items-center mb-6">
-        <Button variant="outline" onClick={() => navigate(-1)} className="mr-4">
+    <div className="container mx-auto py-6 px-2 sm:px-4 md:px-5 w-full max-w-full">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-6 w-full">
+        <Button
+          variant="outline"
+          onClick={() => navigate(-1)}
+          className="mr-0 sm:mr-4 w-fit"
+        >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
         </Button>
         <div>
-          <h1 className="text-3xl font-bold">Student Owing Details</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-xl sm:text-3xl font-bold">
+            Student Owing Details
+          </h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
             View and manage payment history for this student
           </p>
         </div>
       </div>
 
       {student && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8 w-full">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center">
+              <CardTitle className="flex items-center text-base sm:text-lg">
                 <User className="h-5 w-5 mr-2" />
                 Student Information
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2">
+              <div className="space-y-2 text-xs sm:text-sm">
                 <div>
                   <span className="font-semibold">Name:</span> {student.name}
                 </div>
@@ -106,13 +112,13 @@ export default function StudentOwingDetails() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center">
+              <CardTitle className="flex items-center text-base sm:text-lg">
                 <School className="h-5 w-5 mr-2" />
                 Class Information
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2">
+              <div className="space-y-2 text-xs sm:text-sm">
                 <div>
                   <span className="font-semibold">Class:</span>{" "}
                   {student.class?.name}
@@ -129,16 +135,18 @@ export default function StudentOwingDetails() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center">
+              <CardTitle className="flex items-center text-base sm:text-lg">
                 <Calendar className="h-5 w-5 mr-2" />
                 Owing Summary
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2">
+              <div className="space-y-2 text-xs sm:text-sm">
                 <div>
                   <span className="font-semibold">Current Owing:</span>{" "}
-                  <span className="text-xl font-bold">₵{student.owing}</span>
+                  <span className="text-lg sm:text-xl font-bold">
+                    ₵{student.owing}
+                  </span>
                 </div>
                 <div>
                   <span className="font-semibold">Total Records:</span>{" "}
@@ -147,7 +155,7 @@ export default function StudentOwingDetails() {
                 <div className="pt-4">
                   <div className="space-y-2">
                     <Label htmlFor="payment">Payment Amount</Label>
-                    <div className="flex space-x-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <Input
                         id="payment"
                         type="number"
@@ -156,10 +164,12 @@ export default function StudentOwingDetails() {
                         placeholder="Enter amount"
                         value={paymentAmount}
                         onChange={(e) => setPaymentAmount(e.target.value)}
+                        className="w-full sm:w-auto"
                       />
                       <Button
                         onClick={handlePayment}
                         disabled={isProcessingPayment || !paymentAmount}
+                        className="w-full sm:w-auto"
                       >
                         {isProcessingPayment ? "Processing..." : "Pay"}
                       </Button>
@@ -172,8 +182,8 @@ export default function StudentOwingDetails() {
         </div>
       )}
 
-      <div className="rounded-md border">
-        <Table>
+      <div className="rounded-md border overflow-x-auto w-full">
+        <Table className="min-w-[600px]">
           <TableHeader>
             <TableRow>
               <TableHead>Date</TableHead>

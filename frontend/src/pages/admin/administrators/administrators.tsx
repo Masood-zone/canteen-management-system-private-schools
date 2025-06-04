@@ -8,7 +8,7 @@ export default function Administrators() {
   const { data: admins, isLoading, error } = useFetchAdmins();
 
   return (
-    <section>
+    <section className="">
       {/* Header */}
       <Header
         title="Admins"

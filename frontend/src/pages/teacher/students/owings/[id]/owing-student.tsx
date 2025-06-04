@@ -21,7 +21,7 @@ import {
 import {
   ArrowLeft,
   Calendar,
-  DollarSign,
+  BadgeCent,
   Clock,
   AlertTriangle,
 } from "lucide-react";
@@ -91,45 +91,50 @@ export default function OwingStudentDetails() {
   const { student, currentOwing, owingHistory } = studentDetails;
 
   return (
-    <div className="container mx-auto space-y-6">
+    <div className="container mx-auto space-y-6 px-2 sm:px-4 md:px-6 w-full max-w-full">
       {/* Header with Back Button */}
-      <div className="flex items-center gap-4 mb-6">
-        <Button variant="outline" size="icon" onClick={() => navigate(-1)}>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 mb-6">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => navigate(-1)}
+          className="mb-2 sm:mb-0"
+        >
           <ArrowLeft className="h-4 w-4" />
         </Button>
-        <h1 className="text-2xl font-bold">Student Details</h1>
+        <h1 className="text-xl sm:text-2xl font-bold">Student Details</h1>
       </div>
 
       {/* Student Info Card */}
       <Card>
         <CardHeader>
-          <CardTitle>{student.name}</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-lg sm:text-xl">{student.name}</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">
             {student.age} years old • {student.gender} • {student.class.name}
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="flex flex-col space-y-1.5 p-4 border rounded-lg">
-              <span className="text-sm font-medium text-muted-foreground flex items-center gap-1">
-                <DollarSign className="h-4 w-4" />
+            <div className="flex flex-col space-y-1.5 p-4 border rounded-lg min-w-0">
+              <span className="text-xs sm:text-sm font-medium text-muted-foreground flex items-center gap-1">
+                <BadgeCent className="h-4 w-4" />
                 Current Owing
               </span>
-              <span className="text-2xl font-bold">
+              <span className="text-xl sm:text-2xl font-bold break-words">
                 ₵{currentOwing.toFixed(2)}
               </span>
             </div>
 
             {owingSince && currentOwing > 0 && (
-              <div className="flex flex-col space-y-1.5 p-4 border rounded-lg">
-                <span className="text-sm font-medium text-muted-foreground flex items-center gap-1">
+              <div className="flex flex-col space-y-1.5 p-4 border rounded-lg min-w-0">
+                <span className="text-xs sm:text-sm font-medium text-muted-foreground flex items-center gap-1">
                   <Clock className="h-4 w-4" />
                   Owing Since
                 </span>
-                <span className="text-2xl font-bold">
+                <span className="text-xl sm:text-2xl font-bold break-words">
                   {format(new Date(owingSince), "PPP")}
                 </span>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-xs sm:text-sm text-muted-foreground">
                   (
                   {formatDistanceToNow(new Date(owingSince), {
                     addSuffix: true,
@@ -139,12 +144,12 @@ export default function OwingStudentDetails() {
               </div>
             )}
 
-            <div className="flex flex-col space-y-1.5 p-4 border rounded-lg">
-              <span className="text-sm font-medium text-muted-foreground flex items-center gap-1">
+            <div className="flex flex-col space-y-1.5 p-4 border rounded-lg min-w-0">
+              <span className="text-xs sm:text-sm font-medium text-muted-foreground flex items-center gap-1">
                 <Calendar className="h-4 w-4" />
                 Last Updated
               </span>
-              <span className="text-2xl font-bold">
+              <span className="text-xl sm:text-2xl font-bold break-words">
                 {format(new Date(student.updatedAt), "PPP")}
               </span>
             </div>
@@ -161,15 +166,15 @@ export default function OwingStudentDetails() {
       {/* Owing History Card */}
       <Card>
         <CardHeader>
-          <CardTitle>Owing History</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-lg sm:text-xl">Owing History</CardTitle>
+          <CardDescription className="text-xs sm:text-sm">
             Complete history of payments and owing records
           </CardDescription>
         </CardHeader>
         <CardContent>
           {owingHistory && owingHistory.length > 0 ? (
-            <div className="rounded-md border">
-              <Table>
+            <div className="rounded-md border overflow-x-auto">
+              <Table className="min-w-[600px]">
                 <TableHeader>
                   <TableRow>
                     <TableHead>Date</TableHead>
@@ -218,7 +223,7 @@ export default function OwingStudentDetails() {
           ) : (
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <div className="rounded-full bg-primary/10 p-3 mb-4">
-                <DollarSign className="h-6 w-6 text-primary" />
+                <BadgeCent className="h-6 w-6 text-primary" />
               </div>
               <h3 className="text-lg font-semibold">No history found</h3>
               <p className="text-sm text-muted-foreground mt-1 max-w-md">
