@@ -21,9 +21,10 @@ model User {
   gender         String?
   
   // Relations
-  assigned_class Class?     // One-to-one relation with Class (supervisor)
-  records        Record[]   // One-to-many relation with Record
-  otpCodes       OtpCodes[] // One-to-many relation with OtpCodes
+  assigned_class Class?        // One-to-one relation with Class (supervisor)
+  records        Record[]      // One-to-many relation with Record
+  otpCodes       OtpCodes[]    // One-to-many relation with OtpCodes
+  prepayments    Prepayment[]  // One-to-many relation with Prepayment (created by)
 
   // Timestamps
   createdAt      DateTime   @default(now())
@@ -45,9 +46,10 @@ model Class {
   supervisorId Int?      @unique // Each class can have one unique supervisor
   
   // Relations
-  records      Record[]   // One-to-many relation with Record
-  students     Student[]  // One-to-many relation with Student
-  supervisor   User?      @relation(fields: [supervisorId], references: [id], onDelete: SetNull)
+  records      Record[]     // One-to-many relation with Record
+  students     Student[]    // One-to-many relation with Student
+  prepayments  Prepayment[] // One-to-many relation with Prepayment
+  supervisor   User?        @relation(fields: [supervisorId], references: [id], onDelete: SetNull)
   
   // Timestamps
   createdAt    DateTime   @default(now())
@@ -68,8 +70,9 @@ model Student {
   owing       Int      @default(0)  // Track total amount owing
   
   // Relations
-  class       Class?   @relation(fields: [classId], references: [id], onDelete: SetNull)
-  records     Record[] // One-to-many relation with Record
+  class       Class?        @relation(fields: [classId], references: [id], onDelete: SetNull)
+  records     Record[]      // One-to-many relation with Record
+  prepayments Prepayment[]  // One-to-many relation with Prepayment
   
   // Timestamps
   createdAt   DateTime @default(now())
@@ -112,6 +115,36 @@ model Record {
   @@index([payedBy])
   @@index([classId])
   @@index([submitedAt])
+}
+
+// Prepayment model - represents prepaid canteen fees for students
+model Prepayment {
+  id            Int      @id @default(autoincrement())
+  studentId     Int
+  classId       Int
+  amount        Int      // Total amount prepaid
+  durationType  String   // "days", "weeks", "months"
+  durationValue Int      // Number of duration units (e.g., 3 for "3 days")
+  startDate     DateTime // When the prepayment starts
+  endDate       DateTime // When the prepayment expires
+  isActive      Boolean  @default(true)
+  createdBy     Int
+  
+  // Relations
+  student       Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  class         Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  creator       User     @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Indexes
+  @@index([studentId])
+  @@index([classId])
+  @@index([startDate])
+  @@index([endDate])
+  @@index([isActive])
 }
 
 // OtpCodes model - stores one-time passwords for password reset
@@ -165,4 +198,3 @@ model Reference {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
-

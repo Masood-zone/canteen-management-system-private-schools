@@ -8,7 +8,7 @@ import {
   Route,
 } from "react-router-dom";
 import TeacherLayout from "@/components/layout/teacher-layout";
-import ProtectedRoute from "./protected-routes.tsx";
+import ProtectedRoute from "./protected.routes.tsx";
 import AdminHome from "@/pages/admin/home/index.tsx";
 import ViewTeacher from "@/pages/admin/teachers/view/view-teacher.tsx";
 import ViewStudent from "@/pages/admin/students/view/view-student.tsx";
@@ -384,6 +384,26 @@ const rootRoutes = createBrowserRouter(
                 "@/pages/admin/canteen/owings/[id]/student-owing-details.tsx"
               );
               return { Component: StudentOwingDetails };
+            }}
+          />
+        </Route>
+        {/* Prepayments */}
+        <Route
+          path="prepayments"
+          lazy={async () => {
+            const { default: PrepaymentsLayout } = await import(
+              "@/pages/admin/canteen/prepayments/index.tsx"
+            );
+            return { Component: PrepaymentsLayout };
+          }}
+        >
+          <Route
+            index
+            lazy={async () => {
+              const { default: Prepayments } = await import(
+                "@/pages/admin/canteen/prepayments/prepayments.tsx"
+              );
+              return { Component: Prepayments };
             }}
           />
         </Route>

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -42,6 +41,7 @@ import {
   useSubmitTeacherRecord,
   useUpdateStudentStatus,
 } from "@/services/api/records/records.queries";
+import { useFetchClassPrepaymentStatus } from "@/services/api/prepayments/prepayments.queries";
 
 // Define the Class type
 interface Class {
@@ -81,11 +81,36 @@ export default function SetupCanteen() {
     (classItem: Class) => classItem.id === Number.parseInt(selectedClassId)
   )?.supervisorId;
 
+  const { data: prepaymentStatus } = useFetchClassPrepaymentStatus(
+    Number.parseInt(selectedClassId),
+    formattedDate
+  );
+
   useEffect(() => {
-    if (studentRecords) {
+    if (studentRecords && prepaymentStatus) {
+      const updatedRecords = studentRecords.map((record: CanteenRecord) => {
+        // Check if this student has an active prepayment for today
+        const hasActivePrepayment = prepaymentStatus.some(
+          (status) => status.studentId === record.payedBy
+        );
+
+        // If student has active prepayment, mark as paid and prepaid
+        if (hasActivePrepayment) {
+          return {
+            ...record,
+            hasPaid: true,
+            isPrepaid: true,
+          };
+        }
+
+        return record;
+      });
+
+      setRecords(updatedRecords);
+    } else if (studentRecords) {
       setRecords(studentRecords);
     }
-  }, [studentRecords]);
+  }, [studentRecords, prepaymentStatus]);
 
   const handleUpdateStatus = async (
     record: CanteenRecord,
