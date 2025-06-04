@@ -2,7 +2,7 @@ import { Header } from "@/components/typography/heading";
 import { useNavigate } from "react-router-dom";
 import ExpensesTable from "./list/expenses/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ReferencesTable from "./list/references/references-table";
+// import ReferencesTable from "./list/references/references-table";
 import OverallTotals from "./overall/overall";
 
 export default function Expenses() {
@@ -13,25 +13,24 @@ export default function Expenses() {
       {/* Header */}
 
       <Header
-        title="Expenses"
-        buttonText="Setup Expense"
+        title="Accounts"
+        buttonText="Setup Accounts"
         buttonAction={() => navigate("/admin/expenses/add")}
       />
 
       {/* Table Tabs*/}
-      <Tabs defaultValue="expenses" className="w-full mt-5">
+      <Tabs defaultValue="accounts" className="w-full mt-5">
         <TabsList>
-          <TabsTrigger value="expenses">Expenses</TabsTrigger>
-          <TabsTrigger value="references">References</TabsTrigger>
-          <TabsTrigger value="overall">Overall</TabsTrigger>
+          <TabsTrigger value="accounts">Acconuts</TabsTrigger>
+          <TabsTrigger value="revenue">Revenue</TabsTrigger>
         </TabsList>
-        <TabsContent value="expenses">
+        <TabsContent value="accounts">
           <ExpensesTable />
         </TabsContent>
-        <TabsContent value="references">
+        {/* <TabsContent value="references">
           <ReferencesTable />
-        </TabsContent>
-        <TabsContent value="overall">
+        </TabsContent> */}
+        <TabsContent value="revenue">
           <OverallTotals />
         </TabsContent>
       </Tabs>

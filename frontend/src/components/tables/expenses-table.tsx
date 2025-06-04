@@ -185,7 +185,7 @@ export function ExpensesDataTable<TData, TValue>({
                 >
                   Expenses Total:
                 </TableCell>
-                <TableCell>Ghc{calculateTotal}</TableCell>
+                <TableCell>GH₵{calculateTotal}</TableCell>
               </TableRow>
               <TableRow className="">
                 <TableCell
@@ -194,7 +194,7 @@ export function ExpensesDataTable<TData, TValue>({
                 >
                   Canteen Collections Total:
                 </TableCell>
-                <TableCell>Ghc{overallTotal}</TableCell>
+                <TableCell>GH₵{overallTotal}</TableCell>
               </TableRow>
               <TableRow className="">
                 <TableCell
@@ -208,7 +208,7 @@ export function ExpensesDataTable<TData, TValue>({
                     remainingAmount < 0 ? "text-red-500" : "text-green-500"
                   }
                 >
-                  Ghc{remainingAmount}
+                  GH₵{remainingAmount}
                 </TableCell>
               </TableRow>
             </>

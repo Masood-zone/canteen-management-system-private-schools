@@ -409,7 +409,7 @@ const rootRoutes = createBrowserRouter(
         </Route>
         {/* Expenses */}
         <Route
-          path="expenses"
+          path="accounts"
           lazy={async () => {
             const { default: ExpensesLayout } = await import(
               "@/pages/admin/expenses"

@@ -182,7 +182,7 @@ export function CreatePrepaymentModal({
               name="amount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Amount (GHC)</FormLabel>
+                  <FormLabel>Amount (GH₵)</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Enter amount"

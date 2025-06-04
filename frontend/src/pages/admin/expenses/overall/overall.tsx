@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useFetchDashboardSummary } from "@/services/api/records/records.queries";
-import { Users, CreditCard, Receipt, Loader2 } from "lucide-react";
+import { Users, CreditCard, Loader2, BadgeCent } from "lucide-react";
 
 export default function OverallTotals() {
   const { data, error, isLoading } = useFetchDashboardSummary();
@@ -20,7 +20,7 @@ export default function OverallTotals() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-primary">
-              Ghc{summary?.totalAmount || 0}
+              GH₵{summary?.totalAmount || 0}
             </div>
             <p className="text-base pt-2 text-muted-foreground">
               From {summary?.totalStudents || 0} students
@@ -55,7 +55,7 @@ export default function OverallTotals() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-primary">
-              Ghc{summary?.totalPaid || 0}
+              GH₵{summary?.totalPaid || 0}
             </div>
             <p className="text-base pt-2 text-muted-foreground">
               From {summary?.paidStudentsCount || 0} students
@@ -65,11 +65,11 @@ export default function OverallTotals() {
         <Card className="transition-all duration-300 ease-in-out hover:shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Unpaid</CardTitle>
-            <Receipt className="h-4 w-4 text-muted-foreground" />
+            <BadgeCent className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-destructive">
-              -Ghc{summary?.totalUnpaid || 0}
+              -GH₵{summary?.totalUnpaid || 0}
             </div>
             <p className="text-base pt-2 text-muted-foreground">
               Owings: {summary?.unpaidStudentsCount || 0} students

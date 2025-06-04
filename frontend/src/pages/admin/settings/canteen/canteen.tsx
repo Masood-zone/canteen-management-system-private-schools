@@ -118,7 +118,7 @@ export default function Canteen() {
                 {!isEditing ? (
                   <span className="text-lg font-medium text-primary">
                     {amountSetting?.data?.value
-                      ? `Ghc${amountSetting.data.value}`
+                      ? `GH₵${amountSetting.data.value}`
                       : "Not Set"}
                   </span>
                 ) : (
@@ -180,7 +180,7 @@ export default function Canteen() {
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="modal-price" className="col-span-4">
-                Price (Ghc)
+                Price (GH₵)
               </Label>
               <Input
                 id="modal-price"

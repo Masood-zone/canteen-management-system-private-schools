@@ -61,8 +61,8 @@ export const super_nav = {
           url: "/admin/owings",
         },
         {
-          title: "Expenses",
-          url: "/admin/expenses",
+          title: "Accounts",
+          url: "/admin/accounts",
         },
       ],
     },

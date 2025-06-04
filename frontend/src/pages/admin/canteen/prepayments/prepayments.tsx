@@ -147,7 +147,7 @@ export default function Prepayments() {
                 <BadgeCent className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">GHC {totalAmount}</div>
+                <div className="text-2xl font-bold">GH₵ {totalAmount}</div>
               </CardContent>
             </Card>
 
@@ -179,7 +179,7 @@ export default function Prepayments() {
                             {prepayment.student.name}
                           </CardTitle>
                           <CardDescription>
-                            {getDurationText(prepayment)} • GHC{" "}
+                            {getDurationText(prepayment)} • GH₵{" "}
                             {prepayment.amount}
                           </CardDescription>
                         </div>
