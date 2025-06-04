@@ -32,6 +32,9 @@ export default function Profile() {
   } = useForm<FormUser>();
 
   const userData = user?.user;
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
   const gender = watch("gender");
   const onSubmit = async (data: FormUser) => {
     try {

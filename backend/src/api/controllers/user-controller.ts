@@ -17,7 +17,9 @@ export const userController = {
   update: catchAsync(async (req: Request, res: Response) => {
     const id = Number.parseInt(req.params.id);
     const updatedUser = await userService.updateUser(id, req.body);
-    res.json(updatedUser);
+    // Updated user without password
+    const { password, ...userWithoutPassword } = updatedUser;
+    return res.json(userWithoutPassword);
   }),
 
   delete: catchAsync(async (req: Request, res: Response) => {
