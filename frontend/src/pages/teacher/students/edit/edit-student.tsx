@@ -7,7 +7,8 @@ import {
 } from "@/components/ui/card";
 import { useParams } from "react-router-dom";
 import EditStudentForm from "./edit-student-form";
-import { useFetchClasses, useFetchStudent } from "@/services/api/queries";
+import { useFetchClasses } from "@/services/api/classes/classes.queries";
+import { useFetchStudent } from "@/services/api/students/students.queries";
 import { useEffect } from "react";
 import { toast } from "sonner";
 

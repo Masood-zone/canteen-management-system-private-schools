@@ -1,6 +1,6 @@
 import { AnalyticsCard } from "@/components/shared/cards/analytic-cards";
 import { CardsSkeleton } from "@/components/shared/page-loader/loaders";
-import { useAdminDashboardAnalytics } from "@/services/api/queries";
+import { useAdminDashboardAnalytics } from "@/services/api/analytics/analytics.queries";
 import { BookOpen, CurrencyIcon, School, Users } from "lucide-react";
 
 export default function AdminHome() {

@@ -1,7 +1,7 @@
 import { Header } from "@/components/typography/heading";
-import { useFetchAdmins } from "@/services/api/queries";
 import { useNavigate } from "react-router-dom";
 import AdminsTable from "./list/table";
+import { useFetchAdmins } from "@/services/api/admins/admins.queries";
 
 export default function Administrators() {
   const navigate = useNavigate();

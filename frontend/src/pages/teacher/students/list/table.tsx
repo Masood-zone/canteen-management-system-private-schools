@@ -1,11 +1,12 @@
 import { DataTable } from "@/components/ui/data-table";
-import { useDeleteResource, useFetchClasses } from "@/services/api/queries";
+import { useFetchClasses } from "@/services/api/classes/classes.queries";
 import { TableSkeleton } from "@/components/shared/page-loader/loaders";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import ActionMenu from "@/components/actions/action-menu";
+import { useDeleteResource } from "@/services/api/queries";
 
 export default function StudentsTable({
   data,

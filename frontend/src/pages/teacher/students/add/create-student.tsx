@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useCreateStudent } from "@/services/api/queries";
+import { useCreateStudent } from "@/services/api/students/students.queries";
 import { useAuthStore } from "@/store/authStore";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";

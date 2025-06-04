@@ -1,7 +1,7 @@
 import { Header } from "@/components/typography/heading";
 import { useNavigate } from "react-router-dom";
 import StudentsTable from "./list/table";
-import { useFetchStudentsByClass } from "@/services/api/queries";
+import { useFetchStudentsInClass } from "@/services/api/students/students.queries";
 import { useAuthStore } from "@/store/authStore";
 
 export default function Students() {
@@ -11,7 +11,7 @@ export default function Students() {
     data: students,
     isLoading,
     error,
-  } = useFetchStudentsByClass(assigned_class?.id ?? 0);
+  } = useFetchStudentsInClass(assigned_class?.id ?? 0);
 
   return (
     <section>

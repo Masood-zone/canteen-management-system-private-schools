@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useUpdateTeacher } from "@/services/api/queries";
+import { useUpdateTeacher } from "@/services/api/teachers/teachers.queries";
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

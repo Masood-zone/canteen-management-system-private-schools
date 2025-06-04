@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
-import { useUpdateUser } from "@/services/api/queries";
+import { useUpdateUser } from "@/services/api/users/users.queries";
 
 export default function Profile() {
   const { mutate: updateUser, isLoading } = useUpdateUser();

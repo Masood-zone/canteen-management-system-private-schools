@@ -1,6 +1,5 @@
 import GoBackButton from "@/components/shared/go-back/go-back";
 import { PageHeading } from "@/components/typography/heading";
-import { useFetchClassById } from "@/services/api/queries";
 import { useParams } from "react-router-dom";
 import {
   Table,
@@ -12,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { PaleTableSkeleton } from "@/components/shared/page-loader/loaders";
 import { Button } from "@/components/ui/button";
+import { useFetchClassById } from "@/services/api/classes/classes.queries";
 
 export default function ViewClass() {
   const { id } = useParams();

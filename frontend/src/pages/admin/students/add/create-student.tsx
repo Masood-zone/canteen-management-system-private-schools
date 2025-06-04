@@ -19,7 +19,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useCreateStudent, useFetchClasses } from "@/services/api/queries";
+import { useFetchClasses } from "@/services/api/classes/classes.queries";
+import { useCreateStudent } from "@/services/api/students/students.queries";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 

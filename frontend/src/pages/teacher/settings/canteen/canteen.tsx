@@ -8,8 +8,8 @@ import {
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
-import { useFetchRecordsAmount } from "@/services/api/queries";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useFetchRecordsAmount } from "@/services/api/settings/settings.queries";
 
 export default function Canteen() {
   const { data: amountSetting, isLoading, error } = useFetchRecordsAmount();

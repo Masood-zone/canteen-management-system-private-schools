@@ -3,9 +3,9 @@ import { TableSkeleton } from "@/components/shared/page-loader/loaders";
 import ActionMenu from "@/components/actions/action-menu";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useDeleteResource } from "@/services/api/queries";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import { useDeleteResource } from "@/services/api/queries";
 
 export default function AdminsTable({
   data,
@@ -16,7 +16,7 @@ export default function AdminsTable({
   isLoading: boolean;
   error: unknown;
 }) {
-  const { mutateAsync: deleteTeacher } = useDeleteResource(
+  const { mutateAsync: deleteAdmin } = useDeleteResource(
     "administrators",
     "administrators" // Query key
   );
@@ -105,12 +105,12 @@ export default function AdminsTable({
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
-        const teacher = row.original;
+        const admin = row.original;
         return (
           <ActionMenu
-            id={teacher?.id ?? 0}
-            resourceName="Teacher"
-            onDelete={(id) => deleteTeacher(id)}
+            id={admin?.id ?? 0}
+            resourceName="Administrator"
+            onDelete={(id) => deleteAdmin(id)}
           />
         );
       },

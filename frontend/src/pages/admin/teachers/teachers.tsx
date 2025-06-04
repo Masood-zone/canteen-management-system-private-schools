@@ -1,7 +1,7 @@
 import { Header } from "@/components/typography/heading";
 import { useNavigate } from "react-router-dom";
 import TeachersTable from "./list/table";
-import { useFetchTeachers } from "@/services/api/queries";
+import { useFetchTeachers } from "@/services/api/teachers/teachers.queries";
 
 export default function Teachers() {
   const navigate = useNavigate();

@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  useFetchStudentOwingDetails,
-  usePayStudentOwing,
-} from "@/services/api/queries";
+
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -20,6 +17,10 @@ import { format } from "date-fns";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import {
+  useFetchStudentOwingDetails,
+  usePayStudentOwing,
+} from "@/services/api/owing/owing.queries";
 
 export default function StudentOwingDetails() {
   const { id } = useParams<{ id: string }>();

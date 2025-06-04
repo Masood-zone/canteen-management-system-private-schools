@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/authStore";
-import {
-  useStudentRecordsByClassAndDate,
-  useSubmitTeacherRecord,
-} from "@/services/api/queries";
+
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -18,6 +15,10 @@ import { cn } from "@/lib/utils";
 import { TableSkeleton } from "@/components/shared/page-loader/loaders";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import {
+  useStudentRecordsByClassAndDate,
+  useSubmitTeacherRecord,
+} from "@/services/api/records/records.queries";
 
 export default function SubmitCanteenRecords() {
   const navigate = useNavigate();

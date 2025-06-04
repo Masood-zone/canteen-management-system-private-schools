@@ -5,9 +5,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useFetchClassById, useFetchTeachers } from "@/services/api/queries";
 import { useParams } from "react-router-dom";
 import EditClassForm from "./edit-class-form";
+import { useFetchTeachers } from "@/services/api/teachers/teachers.queries";
+import { useFetchClassById } from "@/services/api/classes/classes.queries";
 
 export default function EditClass() {
   const { id } = useParams();

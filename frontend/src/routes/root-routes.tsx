@@ -38,36 +38,6 @@ const rootRoutes = createBrowserRouter(
             return { Component: Login };
           }}
         />
-        {/* Forgot password */}
-        <Route
-          path="forgot-password"
-          lazy={async () => {
-            const { default: ForgotPassword } = await import(
-              "@/pages/auth/forgot-password.tsx"
-            );
-            return { Component: ForgotPassword };
-          }}
-        />
-        {/* Verify OTP */}
-        <Route
-          path="verify-otp"
-          lazy={async () => {
-            const { default: VerifyOTP } = await import(
-              "@/pages/auth/verify-otp.tsx"
-            );
-            return { Component: VerifyOTP };
-          }}
-        />
-        {/* Reset Password*/}
-        <Route
-          path="reset-password"
-          lazy={async () => {
-            const { default: ResetPassword } = await import(
-              "@/pages/auth/reset-password.tsx"
-            );
-            return { Component: ResetPassword };
-          }}
-        />
         {/* Contact Us */}
         <Route
           path="contact-us"

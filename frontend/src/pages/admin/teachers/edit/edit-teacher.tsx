@@ -6,10 +6,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useParams } from "react-router-dom";
-import { useFetchClasses, useFetchTeacher } from "@/services/api/queries";
 import EditTeacherForm from "./edit-teacher-form";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { useFetchTeacher } from "@/services/api/teachers/teachers.queries";
+import { useFetchClasses } from "@/services/api/classes/classes.queries";
 
 export default function EditTeacher() {
   const { id } = useParams();

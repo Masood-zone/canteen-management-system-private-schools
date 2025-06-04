@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
 import ButtonLoader from "@/components/shared/button-loader/button-loader";
 import { toast } from "sonner";
-import { useResetTeacherPassword } from "@/services/api/queries";
+import { useResetTeacherPassword } from "@/services/api/teachers/teachers.queries";
 
 interface ResetPasswordModalProps {
   isOpen: boolean;

@@ -2,14 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import {
-  useFetchClasses,
-  useStudentRecordsByClassAndDate,
-  useUpdateStudentStatus,
-  useSubmitTeacherRecord,
-  useGenerateStudentRecords,
-  useBulkUpdateStudentStatus,
-} from "@/services/api/queries";
+
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -41,6 +34,14 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import type { ColumnDef } from "@tanstack/react-table";
+import { useFetchClasses } from "@/services/api/classes/classes.queries";
+import {
+  useBulkUpdateStudentStatus,
+  useGenerateStudentRecords,
+  useStudentRecordsByClassAndDate,
+  useSubmitTeacherRecord,
+  useUpdateStudentStatus,
+} from "@/services/api/records/records.queries";
 
 // Define the Class type
 interface Class {

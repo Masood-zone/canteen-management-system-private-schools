@@ -9,7 +9,8 @@ import {
   TableHead,
   TableRow,
 } from "@/components/ui/table";
-import { useFetchClassById, useFetchStudent } from "@/services/api/queries";
+import { useFetchClassById } from "@/services/api/classes/classes.queries";
+import { useFetchStudent } from "@/services/api/students/students.queries";
 import { useAuthStore } from "@/store/authStore";
 import { Edit2Icon } from "lucide-react";
 import { Link, useParams } from "react-router-dom";

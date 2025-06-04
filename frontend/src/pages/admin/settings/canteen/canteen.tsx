@@ -10,11 +10,7 @@ import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  useCreateRecordsAmount,
-  useFetchRecordsAmount,
-  useUpdateRecordsAmount,
-} from "@/services/api/queries";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -26,6 +22,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  useCreateRecordsAmount,
+  useFetchRecordsAmount,
+  useUpdateRecordsAmount,
+} from "@/services/api/settings/settings.queries";
 
 export default function Canteen() {
   const { mutate: createRecordsAmount, isLoading: creatingPriceLoader } =

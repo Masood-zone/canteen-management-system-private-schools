@@ -20,8 +20,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useCreateClass, useFetchTeachers } from "@/services/api/queries";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useCreateClass } from "@/services/api/classes/classes.queries";
+import { useFetchTeachers } from "@/services/api/teachers/teachers.queries";
 
 export default function AddClass() {
   const {

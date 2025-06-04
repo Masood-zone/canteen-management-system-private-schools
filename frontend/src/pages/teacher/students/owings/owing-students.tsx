@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuthStore } from "@/store/authStore";
-import { useFetchTeacherClassStudents } from "@/services/api/queries";
+import { useFetchTeacherClassStudents } from "@/services/api/owing/owing.queries";
 import { Button } from "@/components/ui/button";
 import { TableSkeleton } from "@/components/shared/page-loader/loaders";
 import {

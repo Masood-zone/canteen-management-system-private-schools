@@ -1,9 +1,8 @@
 import { ProfessionalAnalyticsCard } from "@/components/shared/cards/analytic-cards";
 import { CardsSkeleton } from "@/components/shared/page-loader/loaders";
-import {
-  useFetchRecordsAmount,
-  useTeacherAnalytics,
-} from "@/services/api/queries";
+import { useTeacherAnalytics } from "@/services/api/analytics/analytics.queries";
+import { useFetchRecordsAmount } from "@/services/api/settings/settings.queries";
+
 import { useAuthStore } from "@/store/authStore";
 import { CurrencyIcon, UserCheck, Users, UserX } from "lucide-react";
 

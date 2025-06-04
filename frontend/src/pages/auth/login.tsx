@@ -59,7 +59,7 @@ export default function Login() {
           <CardHeader>
             <CardTitle>Login</CardTitle>
             <CardDescription>
-              Welcome back! Login to your account
+              Login to your canteen management system account
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
@@ -91,9 +91,6 @@ export default function Login() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
-                  {/* <Button variant="link" className="text-sm text-primary">
-                    <Link to="/forgot-password">Forgot your password?</Link>
-                  </Button> */}
                 </div>
                 <div className="relative">
                   <Input
@@ -142,19 +139,6 @@ export default function Login() {
                 Log in
               </Button>
             </CardContent>
-            {/* <CardFooter>
-              <div className="space-x-4 text-center text-gray-500">
-                <Link to="/contact-us" className="text-sm hover:text-primary">
-                  <span>&copy;CMS</span> Contact
-                </Link>
-                <Link
-                  to="/terms-and-conditions"
-                  className="text-sm hover:text-primary"
-                >
-                  Terms & Conditions
-                </Link>
-              </div>
-            </CardFooter> */}
           </form>
         </Card>
       </main>

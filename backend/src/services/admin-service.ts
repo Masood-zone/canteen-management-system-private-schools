@@ -1,4 +1,4 @@
-import { create } from "domain";
+import bcrypt from "bcryptjs";
 import { adminRepository } from "../db/repositories/admin-repository";
 import { ApiError } from "../utils/api-error";
 import { prisma } from "../db/client";
@@ -108,6 +108,36 @@ export const adminService = {
       password,
     });
   },
+
+  resetAdminPassword: async (id: number, newPassword: string) => {
+    if (!newPassword) {
+      throw new ApiError(400, "New password is required");
+    }
+
+    // Check if teacher exists
+    const teacher = await adminRepository.findById(id);
+    if (!teacher || !["SUPER_ADMIN", "SUPER_ADMIN"].includes(teacher.role)) {
+      throw new ApiError(404, "Teacher not found");
+    }
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the password
+    const updatedTeacher = await adminRepository.update(id, {
+      password: hashedPassword,
+    });
+
+    if (!updatedTeacher) {
+      throw new ApiError(500, "Failed to reset password");
+    }
+
+    return {
+      status: "Password reset successfully",
+      teacherId: id,
+    };
+  },
+
   updateAdmin: async (
     id: number,
     adminData: {

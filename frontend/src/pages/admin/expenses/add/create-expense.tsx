@@ -27,7 +27,6 @@ import {
 
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { useCreateExpense, useFetchReferences } from "@/services/api/queries";
 import { useAuthStore } from "@/store/authStore";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -35,6 +34,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import ReferenceModal from "./reference-modal";
+import { useCreateExpense } from "@/services/api/expenses/expenses.queries";
+import { useFetchReferences } from "@/services/api/references/references.queries";
 
 export default function AddExpense() {
   const {

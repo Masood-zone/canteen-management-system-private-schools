@@ -17,9 +17,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { useTeacherRecords } from "@/services/api/queries";
 import { CardsSkeleton } from "@/components/shared/page-loader/loaders";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useTeacherRecords } from "@/services/api/records/records.queries";
 
 export default function CanteenRecords() {
   const navigate = useNavigate();

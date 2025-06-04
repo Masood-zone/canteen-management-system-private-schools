@@ -13,7 +13,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
-import { useFetchTeacher, useUpdateClass } from "@/services/api/queries";
+import { useUpdateClass } from "@/services/api/classes/classes.queries";
+import { useFetchTeacher } from "@/services/api/teachers/teachers.queries";
 
 export default function EditClassForm({
   classData,

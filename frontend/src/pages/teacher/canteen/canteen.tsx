@@ -16,12 +16,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/authStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  useStudentRecordsByClassAndDate,
-  useUpdateStudentStatus,
-  useGenerateStudentRecords,
-  useBulkUpdateStudentStatus,
-} from "@/services/api/queries";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -36,6 +30,12 @@ import type { ColumnDef } from "@tanstack/react-table";
 import OwingsPage from "./owings";
 import { toast } from "sonner";
 import { TableSkeleton } from "@/components/shared/page-loader/loaders";
+import {
+  useGenerateStudentRecords,
+  useStudentRecordsByClassAndDate,
+  useUpdateStudentStatus,
+  useBulkUpdateStudentStatus,
+} from "@/services/api/records/records.queries";
 
 // Define the CanteenRecord type
 interface CanteenRecord {
@@ -139,6 +139,8 @@ export default function Canteen() {
         settingsAmount: record.settingsAmount,
         classId: classId,
         student: record.student,
+        // Add the required status property for type safety
+        status: bulkAction === "paid" ? "paid" : "unpaid",
       }));
 
       await bulkUpdateStatus(updatedRecords);
@@ -194,6 +196,7 @@ export default function Canteen() {
         isPrepaid: record.isPrepaid,
         settingsAmount: record.settingsAmount,
         classId: classId,
+        status: action === "paid" ? "paid" : "unpaid",
       }));
 
       await bulkUpdateStatus(updatedRecords);

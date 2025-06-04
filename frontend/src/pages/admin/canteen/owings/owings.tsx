@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  useFetchClasses,
-  useFetchOwingStudentsByClass,
-} from "@/services/api/queries";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -42,6 +38,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
+import { useFetchClasses } from "@/services/api/classes/classes.queries";
+import { useFetchOwingStudentsByClass } from "@/services/api/students/students.queries";
 
 // Define the Student type
 interface Student {

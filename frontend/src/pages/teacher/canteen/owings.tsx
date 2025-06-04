@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuthStore } from "@/store/authStore";
-import { useFetchTeacherOwingStudents } from "@/services/api/queries";
 import { Button } from "@/components/ui/button";
 import { TableSkeleton } from "@/components/shared/page-loader/loaders";
 import {
@@ -22,6 +21,7 @@ import {
 } from "@/components/ui/card";
 import { Search, Users, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useFetchTeacherOwingStudents } from "@/services/api/owing/owing.queries";
 
 export default function OwingsPage() {
   const { user } = useAuthStore();

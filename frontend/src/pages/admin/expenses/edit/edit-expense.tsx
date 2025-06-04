@@ -19,9 +19,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import {
   useFetchExpense,
-  useFetchReferences,
   useUpdateExpense,
-} from "@/services/api/queries";
+} from "@/services/api/expenses/expenses.queries";
+import { useFetchReferences } from "@/services/api/references/references.queries";
 import { useAuthStore } from "@/store/authStore";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";

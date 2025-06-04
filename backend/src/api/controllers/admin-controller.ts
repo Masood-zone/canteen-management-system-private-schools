@@ -36,6 +36,15 @@ export const adminController = {
     res.status(201).json(newAdmin);
   },
 
+  resetPassword: catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { password } = req.body;
+
+    const result = await adminService.resetAdminPassword(Number(id), password);
+
+    res.status(200).json(result);
+  }),
+
   update: async (req: Request, res: Response) => {
     const id = Number.parseInt(req.params.id);
     const updatedAdmin = await adminService.updateAdmin(id, req.body);

@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useUpdateTeacher } from "@/services/api/queries";
+import { useUpdateTeacher } from "@/services/api/teachers/teachers.queries";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 

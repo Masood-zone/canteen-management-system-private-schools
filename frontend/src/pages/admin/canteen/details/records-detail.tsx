@@ -1,6 +1,5 @@
 import { useParams, useLocation } from "react-router-dom";
 import { format } from "date-fns";
-import { useFetchTeacherRecordsDetail } from "@/services/api/queries";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -13,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { TableSkeleton } from "@/components/shared/page-loader/loaders";
 import { PageHeading } from "@/components/typography/heading";
+import { useFetchTeacherRecordsDetail } from "@/services/api/teachers/teachers.queries";
 
 export default function TeacherRecordsDetail() {
   const { teacherId } = useParams<{ teacherId: string | undefined }>();

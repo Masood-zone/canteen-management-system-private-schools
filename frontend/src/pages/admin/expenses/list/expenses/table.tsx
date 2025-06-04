@@ -1,12 +1,10 @@
-import {
-  useDeleteResource,
-  useFetchExpenses,
-  useFetchRecords,
-} from "@/services/api/queries";
+import { useDeleteResource } from "@/services/api/queries";
 import { expensesColumn } from "./columns";
 import { TableSkeleton } from "@/components/shared/page-loader/loaders";
 import { ExpensesDataTable } from "@/components/tables/expenses-table";
 import { useEffect, useMemo } from "react";
+import { useFetchExpenses } from "@/services/api/expenses/expenses.queries";
+import { useFetchRecords } from "@/services/api/records/records.queries";
 
 export default function ExpensesTable() {
   const { data: expenses, isLoading, error } = useFetchExpenses();

@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useFetchDashboardSummary } from "@/services/api/queries";
+import { useFetchDashboardSummary } from "@/services/api/records/records.queries";
 import { Users, CreditCard, Receipt, Loader2 } from "lucide-react";
 
 export default function OverallTotals() {

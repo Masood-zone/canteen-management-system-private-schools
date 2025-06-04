@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useFetchStudentOwingDetails } from "@/services/api/queries";
+import { useFetchStudentOwingDetails } from "@/services/api/owing/owing.queries";
 import { Button } from "@/components/ui/button";
 import { TableSkeleton } from "@/components/shared/page-loader/loaders";
 import {

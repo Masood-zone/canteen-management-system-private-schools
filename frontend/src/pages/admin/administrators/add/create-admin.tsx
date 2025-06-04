@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useCreateAdmin } from "@/services/api/queries";
+import { useCreateAdmin } from "@/services/api/admins/admins.queries";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 

@@ -10,12 +10,12 @@ import {
 } from "@/components/ui/popover";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import { useTeacherSubmittedRecords } from "@/services/api/queries";
 import { useAuthStore } from "@/store/authStore";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useState } from "react";
 import { viewColumns } from "./columns";
+import { useTeacherSubmittedRecords } from "@/services/api/records/records.queries";
 
 export default function ViewCanteenRecord() {
   const { assigned_class } = useAuthStore();

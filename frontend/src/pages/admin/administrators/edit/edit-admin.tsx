@@ -6,8 +6,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useParams } from "react-router-dom";
-import { useFetchAdmin } from "@/services/api/queries";
 import EditAdminForm from "./edit-admin-form";
+import { useFetchAdmin } from "@/services/api/admins/admins.queries";
 
 export default function EditTeacher() {
   const { id } = useParams();

@@ -13,9 +13,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useCreateReference } from "@/services/api/queries";
 import { PlusIcon } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useCreateReference } from "@/services/api/references/references.queries";
 
 export default function ReferenceModal() {
   const [open, setOpen] = useState(false);
