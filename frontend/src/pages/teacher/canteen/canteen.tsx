@@ -36,6 +36,9 @@ import {
   useUpdateStudentStatus,
   useBulkUpdateStudentStatus,
 } from "@/services/api/records/records.queries";
+import { useFetchClassPrepaymentStatus } from "@/services/api/prepayments/prepayments.queries";
+import { Badge } from "@/components/ui/badge";
+import { PrepaymentStatus } from "@/components/shared/prepayment-status";
 
 // Define the CanteenRecord type
 interface CanteenRecord {
@@ -54,6 +57,11 @@ interface CanteenRecord {
   isPrepaid?: boolean;
   classId?: number;
   amount?: number;
+  prepaymentInfo?: {
+    studentId: number;
+    amount: number;
+    date: string;
+  };
 }
 
 export default function Canteen() {
@@ -80,12 +88,31 @@ export default function Canteen() {
     useGenerateStudentRecords();
   const { mutate: bulkUpdateStatus, isLoading: bulkUpdatingLoader } =
     useBulkUpdateStudentStatus();
+  const { data: prepaymentStatus } = useFetchClassPrepaymentStatus(
+    classId,
+    formattedDate
+  );
 
   useEffect(() => {
     if (studentRecords) {
-      setRecords(studentRecords);
+      // Merge records with prepayment status
+      const recordsWithPrepayments = studentRecords.map(
+        (record: CanteenRecord) => {
+          // Use record.studentId if available, otherwise undefined
+          const studentId = record.studentId ?? undefined;
+          const prepayment = prepaymentStatus?.find(
+            (ps) => ps.studentId === studentId
+          );
+          return {
+            ...record,
+            isPrepaid: !!prepayment,
+            prepaymentInfo: prepayment,
+          };
+        }
+      );
+      setRecords(recordsWithPrepayments);
     }
-  }, [studentRecords]);
+  }, [studentRecords, prepaymentStatus]);
 
   const handleUpdateStatus = async (
     record: CanteenRecord,
@@ -288,7 +315,31 @@ export default function Canteen() {
     {
       accessorKey: "hasPaid",
       header: "Payment Status",
-      cell: ({ row }) => (row.original.hasPaid ? "Paid" : "Unpaid"),
+      cell: ({ row }) => {
+        const record = row.original;
+        if (record.isPrepaid) {
+          return (
+            <PrepaymentStatus
+              isPrepaid={true}
+              prepaymentInfo={
+                record.prepaymentInfo
+                  ? {
+                      amount: record.prepaymentInfo.amount,
+                      endDate: record.prepaymentInfo.date || "",
+                      durationType: "unknown",
+                      durationValue: 0,
+                    }
+                  : undefined
+              }
+            />
+          );
+        }
+        return (
+          <Badge variant={record.hasPaid ? "default" : "destructive"}>
+            {record.hasPaid ? "Paid" : "Unpaid"}
+          </Badge>
+        );
+      },
     },
     {
       id: "actions",
@@ -351,6 +402,12 @@ export default function Canteen() {
           <p className="text-base">Record canteen for {assigned_class?.name}</p>
         </div>
         <div className="space-x-2">
+          <Button
+            variant="outline"
+            onClick={() => navigate("/teacher/prepayments")}
+          >
+            Manage Prepayments
+          </Button>
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button>Submit canteen records</Button>

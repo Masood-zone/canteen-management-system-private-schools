@@ -102,6 +102,10 @@ export const teacher_nav = {
           url: "/teacher/canteen",
         },
         {
+          title: "Prepayments",
+          url: "/teacher/prepayments",
+        },
+        {
           title: "Owings",
           url: "/teacher/students/owing-students",
         },

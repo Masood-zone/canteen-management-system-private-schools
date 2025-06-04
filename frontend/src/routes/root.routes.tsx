@@ -565,6 +565,26 @@ const rootRoutes = createBrowserRouter(
             }}
           />
         </Route>
+        {/* Prepayments */}
+        <Route
+          path="prepayments"
+          lazy={async () => {
+            const { default: PrepaymentsLayout } = await import(
+              "@/pages/teacher/prepayments/index.tsx"
+            );
+            return { Component: PrepaymentsLayout };
+          }}
+        >
+          <Route
+            index
+            lazy={async () => {
+              const { default: Prepayments } = await import(
+                "@/pages/teacher/prepayments/prepayments.tsx"
+              );
+              return { Component: Prepayments };
+            }}
+          />
+        </Route>
         {/* Settings */}
         <Route
           path="settings"
