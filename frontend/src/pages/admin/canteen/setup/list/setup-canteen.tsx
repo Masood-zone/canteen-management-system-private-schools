@@ -285,7 +285,7 @@ export default function SetupCanteen() {
             {/* Mark All buttons */}
             <Button
               onClick={() => openMarkAllDialog("paid")}
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-primary hover:bg-foreground"
             >
               <CheckSquare className="h-4 w-4 mr-2" />
               Mark All as Paid
@@ -303,7 +303,7 @@ export default function SetupCanteen() {
                 <Button
                   onClick={() => openBulkActionDialog("paid")}
                   disabled={bulkUpdatingLoader}
-                  className="bg-green-600 hover:bg-green-700"
+                  className="bg-primary hover:bg-foreground"
                 >
                   <CheckCircle className="h-4 w-4 mr-2" />
                   Mark {selectedRows.length} as Paid
@@ -324,7 +324,7 @@ export default function SetupCanteen() {
               <Button
                 onClick={() => openBulkActionDialog("paid")}
                 disabled={bulkUpdatingLoader}
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-primary hover:bg-foreground"
               >
                 <CheckCircle className="h-4 w-4 mr-2" />
                 Mark {selectedRows.length} as Paid
@@ -430,7 +430,7 @@ export default function SetupCanteen() {
             <AlertDialogAction
               onClick={handleBulkUpdateStatus}
               className={
-                bulkAction === "paid" ? "bg-green-600 hover:bg-green-700" : ""
+                bulkAction === "paid" ? "bg-primary hover:bg-foreground" : ""
               }
             >
               {bulkUpdatingLoader
@@ -457,9 +457,7 @@ export default function SetupCanteen() {
                 markAllAction && handleMarkAllStudents(markAllAction)
               }
               className={
-                markAllAction === "paid"
-                  ? "bg-green-600 hover:bg-green-700"
-                  : ""
+                markAllAction === "paid" ? "bg-primary hover:bg-foreground" : ""
               }
             >
               {bulkUpdatingLoader

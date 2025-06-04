@@ -73,7 +73,7 @@ export const updateStudentStatus = async (data: StudentRecord) => {
 // Bulk update student status
 interface BulkUpdateStudentStatusRecord {
   id: number;
-  status: string;
+  status?: string;
   // Add other fields as needed
 }
 
