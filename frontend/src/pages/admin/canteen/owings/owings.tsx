@@ -27,7 +27,7 @@ import {
   Search,
   Users,
   Calculator,
-  DollarSign,
+  BadgeCent,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -109,7 +109,7 @@ export default function Owings() {
         <Card className="shadow-sm hover:shadow-md transition-shadow">
           <CardHeader className="pb-2 flex flex-row items-center justify-between space-y-0">
             <CardTitle className="text-base font-medium">Total Owing</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <BadgeCent className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">
