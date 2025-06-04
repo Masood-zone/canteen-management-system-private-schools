@@ -15,7 +15,7 @@ export default function Expenses() {
       <Header
         title="Accounts"
         buttonText="Setup Accounts"
-        buttonAction={() => navigate("/admin/expenses/add")}
+        buttonAction={() => navigate("/admin/accounts/add")}
       />
 
       {/* Table Tabs*/}

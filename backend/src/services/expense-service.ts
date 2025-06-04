@@ -2,8 +2,8 @@ import { expenseRepository } from "../db/repositories/expense-repository";
 import { ApiError } from "../utils/api-error";
 
 export const expenseService = {
-  getAllExpenses: async () => {
-    return expenseRepository.findAll();
+  getAllExpenses: async (filter?: { from?: Date; to?: Date }) => {
+    return expenseRepository.findAll(filter);
   },
 
   getExpenseById: async (id: number) => {

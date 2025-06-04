@@ -5,7 +5,44 @@ import { catchAsync } from "../../utils/catch-async";
 
 export const expenseController = {
   getAllExpenses: catchAsync(async (req: Request, res: Response) => {
-    const expenses = await expenseService.getAllExpenses();
+    // Accept ?from=YYYY-MM-DD&to=YYYY-MM-DD or ?period=year|month|week|all
+    let { from, to, period } = req.query as {
+      from?: string;
+      to?: string;
+      period?: string;
+    };
+    let filter: { from?: Date; to?: Date } = {};
+    const now = new Date();
+    if (period && period !== "all") {
+      if (period === "year") {
+        filter.from = new Date(now.getFullYear(), 0, 1);
+        filter.to = new Date(now.getFullYear(), 11, 31, 23, 59, 59, 999);
+      } else if (period === "month") {
+        filter.from = new Date(now.getFullYear(), now.getMonth(), 1);
+        filter.to = new Date(
+          now.getFullYear(),
+          now.getMonth() + 1,
+          0,
+          23,
+          59,
+          59,
+          999
+        );
+      } else if (period === "week") {
+        const day = now.getDay();
+        const diffToMonday = (day + 6) % 7;
+        filter.from = new Date(now);
+        filter.from.setDate(now.getDate() - diffToMonday);
+        filter.from.setHours(0, 0, 0, 0);
+        filter.to = new Date(filter.from);
+        filter.to.setDate(filter.from.getDate() + 6);
+        filter.to.setHours(23, 59, 59, 999);
+      }
+    } else {
+      if (from) filter.from = new Date(from);
+      if (to) filter.to = new Date(to);
+    }
+    const expenses = await expenseService.getAllExpenses(filter);
     res.status(200).json(expenses);
   }),
 

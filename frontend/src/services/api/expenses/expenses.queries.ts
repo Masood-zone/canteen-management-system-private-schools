@@ -9,10 +9,14 @@ import {
 import { useNavigate } from "react-router-dom";
 
 // Query: Fetch all expenses
-export const useFetchExpenses = () => {
+export const useFetchExpenses = (filter?: {
+  period?: string;
+  from?: string;
+  to?: string;
+}) => {
   return useQuery({
-    queryKey: ["expenses"],
-    queryFn: fetchExpenses,
+    queryKey: ["expenses", filter],
+    queryFn: () => fetchExpenses(filter),
     onError: (error) => {
       console.error(error);
       toast.error("Failed to fetch expenses.");
@@ -41,7 +45,7 @@ export const useCreateExpense = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["expenses"] });
       toast.success("Expense created successfully!");
-      navigate("/admin/expenses");
+      navigate("/admin/accounts");
     },
     onError: (error) => {
       console.error(error);

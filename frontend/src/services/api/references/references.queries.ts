@@ -6,7 +6,6 @@ import {
   createReference,
   updateReference,
 } from "./references.api";
-import { useNavigate } from "react-router-dom";
 
 // Query: Fetch all references
 export const useFetchReferences = () => {
@@ -35,13 +34,13 @@ export const useFetchReference = (id: number) => {
 // Mutation: Create a new reference
 export const useCreateReference = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return useMutation({
     mutationFn: createReference,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["references"] });
       toast.success("Reference created successfully!");
-      navigate("/admin/expenses");
+      // navigate("/admin/expenses");
     },
     onError: (error) => {
       console.error(error);

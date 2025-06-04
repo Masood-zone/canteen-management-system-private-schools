@@ -2,8 +2,15 @@ import { prisma } from "../client";
 import type { Prisma } from "@prisma/client";
 
 export const expenseRepository = {
-  findAll: async () => {
+  findAll: async (filter?: { from?: Date; to?: Date }) => {
+    const where: any = {};
+    if (filter?.from || filter?.to) {
+      where.date = {};
+      if (filter.from) where.date.gte = filter.from;
+      if (filter.to) where.date.lte = filter.to;
+    }
     return prisma.expense.findMany({
+      where,
       include: {
         reference: true,
       },

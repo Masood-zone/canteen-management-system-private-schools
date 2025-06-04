@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const apiClient = axios.create({
-  baseURL: "https://canteen-management-system-backend-kszz.onrender.com",
-  // baseURL: "http://localhost:3400",
+  // baseURL: "https://canteen-management-system-backend-kszz.onrender.com",
+  baseURL: "http://localhost:3400",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
