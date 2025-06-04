@@ -9,6 +9,7 @@ import {
   fetchStudentsInClass,
   fetchOwingStudentsByClass,
 } from "./students.api";
+import { useNavigate } from "react-router-dom";
 
 // All student queries will be moved here
 
@@ -36,11 +37,13 @@ export const useFetchStudent = (id: number) => {
 
 export const useCreateStudent = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   return useMutation({
     mutationFn: createStudent,
     onSuccess: () => {
       toast.success("Student created successfully!");
       queryClient.invalidateQueries({ queryKey: ["students"] });
+      navigate("/admin/students");
     },
     onError: (error) => {
       console.error(error);
@@ -51,11 +54,13 @@ export const useCreateStudent = () => {
 
 export const useUpdateStudent = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   return useMutation({
     mutationFn: updateStudent,
     onSuccess: () => {
       toast.success("Student updated successfully!");
       queryClient.invalidateQueries({ queryKey: ["students"] });
+      navigate("/admin/students");
     },
     onError: (error) => {
       console.error(error);
