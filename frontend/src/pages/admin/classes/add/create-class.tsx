@@ -127,9 +127,10 @@ export default function AddClass() {
         </form>
         <CardFooter>
           <div className="space-x-4 text-center text-gray-500">
-            <Link to="/contact-us" className="text-sm hover:text-primary">
-              Facing issues? Contact us
-            </Link>
+            <Link
+              to="/contact-us"
+              className="text-sm hover:text-primary"
+            ></Link>
           </div>
         </CardFooter>
       </Card>

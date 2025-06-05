@@ -143,16 +143,14 @@ export default function EditAdminForm({ adminData }: { adminData: Admin }) {
         <Button type="submit" className="w-full" disabled={isLoading}>
           <ButtonLoader
             isPending={isLoading}
-            fallback="Update Teacher"
-            loadingText="Updating Teacher..."
+            fallback="Update Administrator"
+            loadingText="Updating Administrator..."
           />
         </Button>
       </CardContent>
       <CardFooter>
         <div className="space-x-4 text-center text-gray-500">
-          <Link to="/contact-us" className="text-sm hover:text-primary">
-            Facing issues? Contact us
-          </Link>
+          <Link to="/contact-us" className="text-sm hover:text-primary"></Link>
         </div>
       </CardFooter>
     </form>

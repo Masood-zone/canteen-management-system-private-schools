@@ -29,7 +29,13 @@ export const adminRepository = {
         phone: true,
         role: true,
         gender: true,
-        assigned_class: true,
+        assigned_class: {
+          select: {
+            id: true,
+            name: true,
+            description: true,
+          },
+        },
       },
     });
   },
