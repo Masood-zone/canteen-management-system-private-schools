@@ -45,7 +45,7 @@ export default function AdminHome() {
               />
             </div>
             <div
-              onClick={() => navigate("/admin/expenses")}
+              onClick={() => navigate("/admin/accounts")}
               className="cursor-pointer"
             >
               <AnalyticsCard
