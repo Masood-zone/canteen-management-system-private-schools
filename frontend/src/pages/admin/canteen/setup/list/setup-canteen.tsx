@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -61,8 +61,9 @@ export default function SetupCanteen() {
   const [markAllAction, setMarkAllAction] = useState<"paid" | "unpaid" | null>(
     null
   );
+  const [isSubmittedToday, setIsSubmittedToday] = useState(false);
 
-  const formattedDate = selectedDate.toISOString().split("T")[0];
+  const formattedDate = format(selectedDate, "yyyy-MM-dd");
   const { data: classes, isLoading: classesLoading } = useFetchClasses();
   const { data: studentRecords, isLoading: recordsLoading } =
     useStudentRecordsByClassAndDate(
@@ -234,18 +235,34 @@ export default function SetupCanteen() {
     setShowMarkAllDialog(true);
   };
 
-  const handleGenerateRecords = () => {
-    generateRecords({
-      classId: Number.parseInt(selectedClassId),
-      date: selectedDate.toISOString(),
-    });
-  };
+  // Helper to get the submission key for localStorage
+  const getSubmissionKey = (classId: string, date: string) =>
+    `canteen_submitted_${classId}_${date}`;
 
+  // Helper to check if the current class/date is submitted
+  const checkIsSubmitted = useCallback((classId: string, date: string) => {
+    if (!classId || !date) return false;
+    return localStorage.getItem(getSubmissionKey(classId, date)) === "true";
+  }, []);
+
+  // State for per-class/date submission
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Update isSubmitted whenever class/date changes
+  useEffect(() => {
+    setIsSubmitted(checkIsSubmitted(selectedClassId, formattedDate));
+  }, [selectedClassId, formattedDate, checkIsSubmitted]);
+
+  // Check lockout for selected class/date
+  useEffect(() => {
+    if (!selectedClassId) return;
+    const key = getSubmissionKey(selectedClassId, formattedDate);
+    setIsSubmittedToday(!!localStorage.getItem(key));
+  }, [selectedClassId, formattedDate]);
+
+  // When submitting, set lockout for current class/date
   const handleSubmitCanteen = async () => {
-    if (!selectedClassId) {
-      toast.error("Please select a class before submitting");
-      return;
-    }
+    if (!selectedClassId) return;
 
     const payload = {
       classId: Number.parseInt(selectedClassId),
@@ -282,6 +299,17 @@ export default function SetupCanteen() {
 
     try {
       await submitRecord(payload);
+      // Mark as submitted for today
+      const today = new Date().toISOString().split("T")[0];
+      localStorage.setItem("canteen_last_submitted", today);
+      localStorage.setItem(
+        getSubmissionKey(selectedClassId, formattedDate),
+        "true"
+      );
+      setIsSubmitted(true);
+      const key = getSubmissionKey(selectedClassId, formattedDate);
+      localStorage.setItem(key, "1");
+      setIsSubmittedToday(true);
     } catch (error) {
       console.error(error);
       toast.error("Failed to submit canteen records");
@@ -302,6 +330,40 @@ export default function SetupCanteen() {
     () => {} // This should be your function that handles row selection changes
   ) as ColumnDef<CanteenRecord, unknown>[];
 
+  // When records are loaded, mark them as submitted if today is submitted
+  useEffect(() => {
+    if (isSubmittedToday && records.length > 0) {
+      setRecords((prev) => prev.map((r) => ({ ...r, isSubmitted: true })));
+    }
+  }, [isSubmittedToday, records.length]);
+
+  // Helper: get lockout key for current class/date
+  const getLockoutKey = (classId: string, date: string) =>
+    `canteen_submitted_${classId}_${date}`;
+
+  // Check lockout for selected class/date
+  useEffect(() => {
+    if (!selectedClassId) return;
+    const key = getLockoutKey(selectedClassId, formattedDate);
+    setIsSubmittedToday(!!localStorage.getItem(key));
+  }, [selectedClassId, formattedDate]);
+
+  // When generating records, set lockout for current class/date
+  const handleGenerateRecords = async () => {
+    if (!selectedClassId) return;
+    await generateRecords({
+      classId: Number.parseInt(selectedClassId),
+      date: selectedDate.toISOString(),
+    });
+    const key = getLockoutKey(selectedClassId, formattedDate);
+    localStorage.setItem(key, "1");
+    setIsSubmittedToday(true);
+  };
+
+  // Date picker: only allow today and past weekdays (no weekends, no future)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
   return (
     <section className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8 w-full max-w-full">
       <div className="flex flex-col md:flex-row md:justify-between gap-4 mb-6 w-full overflow-x-auto">
@@ -311,6 +373,7 @@ export default function SetupCanteen() {
             <Button
               onClick={() => openMarkAllDialog("paid")}
               className="bg-primary hover:bg-foreground whitespace-nowrap"
+              disabled={isSubmitted}
             >
               <CheckSquare className="h-4 w-4 mr-2" />
               Mark All as Paid
@@ -319,6 +382,7 @@ export default function SetupCanteen() {
               onClick={() => openMarkAllDialog("unpaid")}
               variant="destructive"
               className="whitespace-nowrap"
+              disabled={isSubmitted}
             >
               <XCircle className="h-4 w-4 mr-2" />
               Mark All as Unpaid
@@ -327,7 +391,7 @@ export default function SetupCanteen() {
               <>
                 <Button
                   onClick={() => openBulkActionDialog("paid")}
-                  disabled={bulkUpdatingLoader}
+                  disabled={bulkUpdatingLoader || isSubmitted}
                   className="bg-primary hover:bg-foreground whitespace-nowrap"
                 >
                   <CheckCircle className="h-4 w-4 mr-2" />
@@ -335,7 +399,7 @@ export default function SetupCanteen() {
                 </Button>
                 <Button
                   onClick={() => openBulkActionDialog("unpaid")}
-                  disabled={bulkUpdatingLoader}
+                  disabled={bulkUpdatingLoader || isSubmitted}
                   variant="destructive"
                   className="whitespace-nowrap"
                 >
@@ -348,7 +412,7 @@ export default function SetupCanteen() {
         </div>
         <Button
           onClick={handleSubmitCanteen}
-          disabled={!selectedClassId || submittingRecord}
+          disabled={!selectedClassId || submittingRecord || isSubmitted}
           className="w-full md:w-auto"
         >
           {submittingRecord ? "Submitting..." : "Submit Canteen Records"}
@@ -390,12 +454,18 @@ export default function SetupCanteen() {
               selected={selectedDate}
               onSelect={(date) => date && setSelectedDate(date)}
               initialFocus
+              disabled={[
+                // Disable weekends
+                { dayOfWeek: [0, 6] },
+                // Disable all future dates
+                { after: new Date() },
+              ]}
             />
           </PopoverContent>
         </Popover>
         <Button
           onClick={handleGenerateRecords}
-          disabled={isGenerating}
+          disabled={isGenerating || isSubmittedToday}
           className="w-full sm:w-auto"
         >
           {isGenerating ? "Generating..." : "Generate Records"}

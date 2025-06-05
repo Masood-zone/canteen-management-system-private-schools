@@ -11,10 +11,14 @@ export function TableSkeleton() {
 function DataTableSkeleton() {
   return (
     <div className="flex flex-col space-y-5">
-      <Skeleton className="w-full h-16 bg-primary/75" />
-      <Skeleton className="w-full h-16 bg-gray-300" />
-      <Skeleton className="w-full h-16 bg-gray-300" />
-      <Skeleton className="w-full h-16 bg-gray-300" />
+      <div className="w-full h-16 bg-primary">
+        <span className="flex items-center justify-center h-full text-white font-semibold text-lg">
+          Select a class to see their canteen records.
+        </span>
+      </div>
+      <div className="w-full h-16 bg-gray-300" />
+      <div className="w-full h-16 bg-gray-300" />
+      <div className="w-full h-16 bg-gray-300" />
     </div>
   );
 }
