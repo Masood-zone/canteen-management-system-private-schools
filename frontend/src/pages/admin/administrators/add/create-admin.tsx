@@ -139,7 +139,9 @@ export default function AddAdmin() {
             {/* Password */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password">Credentials</Label>
+                <Label htmlFor="password">
+                  Credentials/Password (Password for the admin to use to login)
+                </Label>
               </div>
               <Input
                 type="password"
@@ -168,8 +170,8 @@ export default function AddAdmin() {
             <Button type="submit" className="w-full " disabled={isLoading}>
               <ButtonLoader
                 isPending={isLoading}
-                loadingText="Creating Teacher..."
-                fallback="Create Teacher"
+                loadingText="Creating Administrator..."
+                fallback="Create Administrator"
               />
             </Button>
           </CardContent>
